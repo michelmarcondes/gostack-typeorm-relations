@@ -9,19 +9,27 @@ import {
 
 import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
 
+@Entity('products')
 class Product {
+  @PrimaryGeneratedColumn()
   id: string;
 
+  @Column()
   name: string;
 
+  @Column()
   price: number;
 
+  @Column()
   quantity: number;
 
+  @OneToMany(() => OrdersProducts, op => op.product, { cascade: true })
   order_products: OrdersProducts[];
 
+  @CreateDateColumn()
   created_at: Date;
 
+  @UpdateDateColumn()
   updated_at: Date;
 }
 
